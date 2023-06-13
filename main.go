@@ -36,4 +36,7 @@ func initializeRedisQueueWorkers() {
 	if len(consumerErrors) > 0 {
 		log.Printf("Unable to initialize redis queue workers, errors: %v", consumerErrors)
 	}
+
+	// Test Producer
+	worker.PublishToQueues()
 }
