@@ -4,9 +4,9 @@ import "time"
 
 // Queue Names
 const (
-	queue1 = "queue1"
-	queue2 = "queue2"
-	queue3 = "queue3"
+	queue1 = "things"
+	queue2 = "foobars"
+	queue3 = "dorandom"
 )
 
 // Consumer

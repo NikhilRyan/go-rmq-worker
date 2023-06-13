@@ -33,11 +33,11 @@ func (qc *QueueConfig) AddBatchConfig(enabled bool, size int64, timeout time.Dur
 func GetAllQueueWithConfig() (queues []QueueConfig) {
 
 	// First Queue
-	firstQueue := GetNewQueueConfig(queue1, prefetchLimit, 1, pollDuration, true)
+	firstQueue := GetNewQueueConfig(queue1, numConsumers, prefetchLimit, pollDuration, true)
 	queues = append(queues, firstQueue)
 
 	// Second Queue
-	SecondQueue := GetNewQueueConfig(queue2, prefetchLimit, 1, pollDuration, true)
+	SecondQueue := GetNewQueueConfig(queue2, numConsumers, prefetchLimit, pollDuration, true)
 	SecondQueue.AddBatchConfig(true, batchSize, batchTimeout)
 	queues = append(queues, SecondQueue)
 
