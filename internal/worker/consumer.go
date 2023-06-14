@@ -5,25 +5,34 @@ import (
 	"github.com/adjust/rmq/v5"
 	"log"
 	"time"
+	"worker/internal/worker/handlers"
 )
 
 type Consumer struct {
-	name   string
-	count  int
-	before time.Time
+	name      string
+	queueName string
+	count     int
+	before    time.Time
 }
 
-func NewConsumer(tag int) *Consumer {
+func NewConsumer(tag int, queueName string) *Consumer {
 	return &Consumer{
-		name:   fmt.Sprintf("consumer_%d", tag),
-		count:  0,
-		before: time.Now(),
+		name:      fmt.Sprintf("consumer_%d", tag),
+		queueName: queueName,
+		count:     0,
+		before:    time.Now(),
 	}
 }
 
 func (consumer *Consumer) Consume(delivery rmq.Delivery) {
+
 	payload := delivery.Payload()
-	debugf("start consume %s", payload)
+	switch consumer.queueName {
+	case queueThings:
+		handlers.HandleThings(consumer.queueName, payload)
+	}
+
+	//log.Printf("start consumer for queue: %v with payload: %s", consumer.queueName, payload)
 	time.Sleep(consumeDuration)
 
 	consumer.count++

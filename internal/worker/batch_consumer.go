@@ -4,6 +4,7 @@ import (
 	"github.com/adjust/rmq/v5"
 	"log"
 	"time"
+	"worker/internal/worker/handlers"
 )
 
 type BatchConsumer struct {
@@ -16,6 +17,10 @@ func NewBatchConsumer(tag string) *BatchConsumer {
 
 func (consumer *BatchConsumer) Consume(batch rmq.Deliveries) {
 	payloads := batch.Payloads()
+	switch consumer.tag {
+	case queueFoobars:
+		handlers.HandleFoobars(consumer.tag, payloads)
+	}
 	debugf("start consume %q", payloads)
 	time.Sleep(consumeDuration)
 

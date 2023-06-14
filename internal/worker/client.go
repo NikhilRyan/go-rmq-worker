@@ -63,8 +63,8 @@ func StartConsumers() (errors []error) {
 			}
 		} else {
 			for i := 0; i < config.NumWorkers; i++ {
-				consumerName := fmt.Sprintf("queue_%v_consumer_%d", config.Name, i)
-				if _, addConsumerErr := queue.AddConsumer(consumerName, NewConsumer(i)); addConsumerErr != nil {
+				consumerName := fmt.Sprintf(consumerNameString, config.Name, i)
+				if _, addConsumerErr := queue.AddConsumer(consumerName, NewConsumer(i, config.Name)); addConsumerErr != nil {
 					log.Printf("Unable to add consumer for queue (%v), error: %v", config.Name, addConsumerErr)
 					errors = append(errors, addConsumerErr)
 					break
