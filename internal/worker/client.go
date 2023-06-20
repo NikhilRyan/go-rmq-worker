@@ -13,10 +13,10 @@ var (
 )
 
 func InitializeConnection() (err error) {
-	errChan := make(chan error, 10)
-	go logErrors(errChan)
-
 	once.Do(func() {
+		errChan := make(chan error, 10)
+		go logErrors(errChan)
+
 		connection, err = rmq.OpenConnection("myBroker", "tcp", "localhost:6379", 2, errChan)
 		if err != nil {
 			log.Print("Unable to create redis connection for queues: ", err)
