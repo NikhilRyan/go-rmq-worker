@@ -16,13 +16,13 @@ To get started with this repository, follow these steps:
 1. Clone the repository:
 
 ```bash
-git clone https://github.com/nikhilryan/go-worker.git
+git clone https://github.com/NikhilRyan/go-rmq-worker
 ```
 
 2. Change into the project directory:
 
 ```bash
-cd go-worker
+cd go-rmq-worker
 ```
 
 3. Install the dependencies:
@@ -44,7 +44,7 @@ go build
 6. Run the worker:
 
 ```bash
-./go-worker
+./go-rmq-worker
 ```
 
 The worker will start listening for messages in the Redis queue and process them as they arrive.
